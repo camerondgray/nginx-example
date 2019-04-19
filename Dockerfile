@@ -1,7 +1,7 @@
 ## BASE ########################################################
 FROM debian:stretch AS base
 
-RUN apt-get update -y && apt-get install -y build-essential curl
+RUN apt-get update -y && apt-get install -y build-essential curl nginx
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
 
@@ -14,8 +14,10 @@ COPY package-lock.json ./
 
 RUN npm install
 
+ADD nginx.conf /etc/nginx/nginx.conf
+
 COPY . /usr/src/app
 
-EXPOSE 3000
+EXPOSE 8000
 
-CMD ["npm", "run", "dev"]
+CMD ["/usr/src/app/start.sh"]

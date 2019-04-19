@@ -11,7 +11,7 @@ client.on("error", function (err) {
 });
 
 client.on("connect", function(){
-    client.set("1", "Hello from Diatom", redis.print)
+    client.set("1", "Hello from Convox", redis.print)
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 })
 
